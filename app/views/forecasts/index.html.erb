@@ -1,0 +1,25 @@
+<h1>Get a Forecast:</h1>
+<%= form_tag '/forecast', method: :get do %>
+  <div>
+    <%= label_tag :city %>
+    <%= text_field_tag :city %>
+  </div>
+  <div>
+    <%= label_tag :state %>
+    <%= text_field_tag :state %>
+  </div>
+<%= submit_tag "Get Forecast" %>
+<% end %>
+
+<h1><%= @city.downcase.split.map(&:capitalize).join(' ') %>, <%= @state.upcase %></h1>
+<p>Current Temperature: <%= @forecast_today["temp"] %>F</p>
+<p>Current Weather: <%= @forecast_today["text"] %></p>
+<p>5-Day Forecast:</p>
+<p>---------------------------------</p>
+<% @forecast_future.each do |forecast| %>
+  <p>Date: <%= forecast["date"] %></p>
+  <p>High: <%= forecast["high"] %></p>
+  <p>Low: <%= forecast["low"] %></p>
+  <p>Forecast: <%= forecast["text"] %></p>
+  <p>---------------------------------</p>
+<% end %>
